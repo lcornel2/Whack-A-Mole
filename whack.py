@@ -176,30 +176,53 @@ class Whack:
 			GPIO.setup(self.pins, GPIO.OUT)
 			
 			self.set_pin(0, -1)
+			self.set_pin(1, -1)
+			self.set_pin(2, -1)
+			GPIO.setup(31, GPIO.IN, pull_up_down = GPIO.PUD_UP)
+			GPIO.setup(26, GPIO.IN, pull_up_down = GPIO.PUD_UP)
+			GPIO.setup(36, GPIO.IN, pull_up_down = GPIO.PUD_UP)
+			GPIO.setup(33, GPIO.IN, pull_up_down = GPIO.PUD_UP)
 			
+			while(self.gameIsRunning):
+				
+				moleWhacked = GPIO.input(26)
+				currentMole = GPIO.input(16)
+				if (moleWhacked = False) and (currentMole = False):
+					self.score += 1
+					time.sleep(0.12)
+				
+				moleWhacked = GPIO.input(36)
+				currentMole = GPIO.input(16)
+				if (moleWhacked = False) and (currentMole = False):
+					self.score += 1
+					time.sleep(0.12)
+					
+				moleWhacked = GPIO.input(33)
+				currentMole = GPIO.input(16)
+				if (moleWhacked = False) and (currentMole = False):
+					self.score += 1
+					time.sleep(0.12)
+					
+				moleWhacked = GPIO.input(31)
+				currentMole = GPIO.input(16)
+				if (moleWhacked = False) and (currentMole = False):
+					self.score += 1
+					time.sleep(0.12)
+					
+		def timeTracker(self):
+			#Count time since player started
+			#If time reaches limit, gameIsRunning = False
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+			t = self.count
+			while t > 0:
+				t -= 1
+				time.sleep(1)
+			self.gameIsRunning = False
+			return 
+		
+		
+root = Tk()
+root.wm_title('Whack-A-Mole')
+whack = Whack(root)
+root.geometry('900x300+200+175')
+root.mainloop()			
